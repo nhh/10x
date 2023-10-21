@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://c742tgp72t6t2"]
+
+[ext_resource type="Script" path="res://src/character/Character.gd" id="1_5el23"]
+[ext_resource type="Texture2D" uid="uid://bt5f2mk81oljs" path="res://Assets/Scene/Food/02_dish_2.png" id="2_squ6c"]
+[ext_resource type="Texture2D" uid="uid://j3y0ddxxfx7h" path="res://Assets/Scene/Food/06_apple_pie_dish.png" id="3_475ay"]
+[ext_resource type="Texture2D" uid="uid://cvf0dngpa0pq5" path="res://Assets/Scene/Food/04_bowl.png" id="4_tcifs"]
+[ext_resource type="Texture2D" uid="uid://heav05l2pspe" path="res://Assets/Scene/Food/03_dish_pile.png" id="5_lmb8e"]
+[ext_resource type="Script" path="res://src/PilzCollider.gd" id="6_kjdkr"]
+[ext_resource type="Texture2D" uid="uid://cqv5klkwgak7b" path="res://Assets/Scene/mario_?.jpg" id="7_r0jhh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_74jew"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": ExtResource("2_squ6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_475ay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tcifs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lmb8e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xhe5"]
+size = Vector2(46.5, 38)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bd64o"]
+distance = -30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddtri"]
+size = Vector2(64, 60)
+
+[node name="Level1" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(130, 271)
+script = ExtResource("1_5el23")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(21.5, 21.5)
+scale = Vector2(1.78125, 1.78125)
+sprite_frames = SubResource("SpriteFrames_74jew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(22.25, 21)
+shape = SubResource("RectangleShape2D_4xhe5")
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+process_callback = 0
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+
+[node name="Links" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(32, 240)
+rotation = 1.5708
+scale = Vector2(10, 1)
+shape = SubResource("WorldBoundaryShape2D_bd64o")
+one_way_collision = true
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="Rechts" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(608, 149)
+rotation = -1.5708
+scale = Vector2(10, 1)
+shape = SubResource("WorldBoundaryShape2D_bd64o")
+one_way_collision = true
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="Unten" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(319, 329)
+scale = Vector2(10, 1)
+shape = SubResource("WorldBoundaryShape2D_bd64o")
+one_way_collision = true
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="Oben2" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(293, 29)
+rotation = 3.14159
+scale = Vector2(10, 1)
+shape = SubResource("WorldBoundaryShape2D_bd64o")
+one_way_collision = true
+debug_color = Color(0.980392, 0, 0, 0.419608)
+
+[node name="Questionmarks" type="Node2D" parent="."]
+
+[node name="LinksOben" type="Sprite2D" parent="Questionmarks"]
+position = Vector2(32, 32)
+texture = ExtResource("7_r0jhh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Questionmarks/LinksOben"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Questionmarks/LinksOben/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="Mario?2" type="Sprite2D" parent="Questionmarks"]
+position = Vector2(608, 328)
+texture = ExtResource("7_r0jhh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Questionmarks/Mario?2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Questionmarks/Mario?2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="Mario?3" type="Sprite2D" parent="Questionmarks"]
+position = Vector2(32, 328)
+texture = ExtResource("7_r0jhh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Questionmarks/Mario?3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Questionmarks/Mario?3/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="Mario?4" type="Sprite2D" parent="Questionmarks"]
+position = Vector2(608, 32)
+texture = ExtResource("7_r0jhh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Questionmarks/Mario?4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Questionmarks/Mario?4/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+position = Vector2(386, 219)
+script = ExtResource("6_kjdkr")
+
+[node name="Pilz" type="Sprite2D" parent="CollisionArea2D"]
+texture = ExtResource("7_r0jhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="CollisionArea2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D/StaticBody2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ddtri")
