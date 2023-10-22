@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://kgcuvvtq2c61"]
+
+[ext_resource type="Texture2D" uid="uid://cqv5klkwgak7b" path="res://Assets/Scene/mario_?.jpg" id="1_prmw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70f4p"]
+size = Vector2(64, 60)
+
+[node name="Monster" type="RigidBody2D"]
+
+[node name="QuestionMarkTexture" type="Sprite2D" parent="."]
+position = Vector2(174, -266)
+texture = ExtResource("1_prmw0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(174, -268)
+shape = SubResource("RectangleShape2D_70f4p")

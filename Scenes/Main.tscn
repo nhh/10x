@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c742tgp72t6t2"]
+[gd_scene load_steps=14 format=3 uid="uid://c742tgp72t6t2"]
 
 [ext_resource type="Script" path="res://src/character/Character.gd" id="1_5el23"]
 [ext_resource type="Texture2D" uid="uid://bt5f2mk81oljs" path="res://Assets/Scene/Food/02_dish_2.png" id="2_squ6c"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://heav05l2pspe" path="res://Assets/Scene/Food/03_dish_pile.png" id="5_lmb8e"]
 [ext_resource type="Script" path="res://src/PilzCollider.gd" id="6_kjdkr"]
 [ext_resource type="Texture2D" uid="uid://cqv5klkwgak7b" path="res://Assets/Scene/mario_?.jpg" id="7_r0jhh"]
+[ext_resource type="Script" path="res://src/level/Spawner.gd" id="8_1du3y"]
+[ext_resource type="PackedScene" uid="uid://kgcuvvtq2c61" path="res://Scenes/Monsters/Monster.tscn" id="9_15060"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_74jew"]
 animations = [{
@@ -38,9 +40,10 @@ distance = -30.0
 size = Vector2(64, 60)
 
 [node name="Level1" type="Node2D"]
+position = Vector2(-1, -3)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(130, 271)
+position = Vector2(11, 242)
 script = ExtResource("1_5el23")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
@@ -55,34 +58,23 @@ shape = SubResource("RectangleShape2D_4xhe5")
 [node name="Timer" type="Timer" parent="CharacterBody2D"]
 process_callback = 0
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
 
-[node name="Links" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(32, 240)
-rotation = 1.5708
-scale = Vector2(10, 1)
-shape = SubResource("WorldBoundaryShape2D_bd64o")
-one_way_collision = true
-debug_color = Color(0.980392, 0, 0, 0.419608)
-
-[node name="Rechts" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(608, 149)
-rotation = -1.5708
-scale = Vector2(10, 1)
-shape = SubResource("WorldBoundaryShape2D_bd64o")
-one_way_collision = true
-debug_color = Color(0.980392, 0, 0, 0.419608)
-
 [node name="Unten" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(319, 329)
+visible = false
+position = Vector2(318, 329)
 scale = Vector2(10, 1)
 shape = SubResource("WorldBoundaryShape2D_bd64o")
 one_way_collision = true
 debug_color = Color(0.980392, 0, 0, 0.419608)
 
 [node name="Oben2" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+visible = false
 position = Vector2(293, 29)
 rotation = 3.14159
 scale = Vector2(10, 1)
@@ -143,3 +135,11 @@ shape = SubResource("RectangleShape2D_ddtri")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D/StaticBody2D"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_ddtri")
+
+[node name="Monsters" type="Node2D" parent="."]
+script = ExtResource("8_1du3y")
+monster = ExtResource("9_15060")
+
+[node name="Timer" type="Timer" parent="Monsters"]
+wait_time = 2.0
+autostart = true
