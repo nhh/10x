@@ -14,5 +14,6 @@ func _process(delta):
 func timeout():
 	var spawn := monster.instantiate() as Node2D
 	add_child(spawn)
-	spawn.global_position = global_position
+	var randi := randi_range(15, 600)
+	spawn.global_position = Vector2(randi,0)
 	timer.start()

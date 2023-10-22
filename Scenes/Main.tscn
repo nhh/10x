@@ -61,6 +61,7 @@ shape = SubResource("RectangleShape2D_4xhe5")
 process_callback = 0
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+visible = false
 position_smoothing_enabled = true
 
 [node name="Walls" type="Node2D" parent="."]
@@ -148,4 +149,3 @@ autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -9.0
-pitch_scale = 0.77
